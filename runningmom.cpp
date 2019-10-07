@@ -1,6 +1,3 @@
-// Michael Pfeifer
-// Version 02, 2018/01/17
-
 #include <bits/stdc++.h>
 
 using namespace std;
