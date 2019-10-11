@@ -17,9 +17,9 @@ def bfs(neighborsOf, inDegrees):
             inDegrees[neighbor] -= 1
             # If this neighbor reached zero of these reversed in degrees then
             # it only had a one way ticket to a city that we know is trapped
-            # so we know this one is a dead end too and we need to check which
+            # so we know this one is a dead end too, and we need to check which
             # cities have a one way ticket to this neighbor. So we add it to
-            # the queue to check its neighbors.
+            # the queue to check its neighbors for the same thing.
             if not inDegrees[neighbor]:
                 queue.append(neighbor)
     return isTrapped
