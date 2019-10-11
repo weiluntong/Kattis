@@ -1,18 +1,28 @@
 #!/usr/bin/env python3
 
 
-def detectCycle(node, neighborsOf, inDegrees):
-    inDegreesHere = inDegrees.copy()
+def bfs(neighborsOf, inDegrees):
+    isTrapped = []
     queue = []
-    queue.append(node)
+    # Find all dead ends. All cities with zero of these reversed in degrees
+    # are dead ends. If no dead ends exist at the very beginning, then every
+    # city has somewhere our MoM can run to in this graph.
+    for i in inDegrees:
+        if not inDegrees[i]:
+            queue.append(i)
     while (queue):
         city = queue.pop(0)
-        if inDegreesHere[city] == -1:
-            return True
+        isTrapped.append(city)
         for neighbor in neighborsOf[city]:
-            inDegreesHere[neighbor] -= 1
-            queue.append(neighbor)
-    return False
+            inDegrees[neighbor] -= 1
+            # If this neighbor reached zero of these reversed in degrees then
+            # it only had a one way ticket to a city that we know is trapped
+            # so we know this one is a dead end too and we need to check which
+            # cities have a one way ticket to this neighbor. So we add it to
+            # the queue to check its neighbors.
+            if not inDegrees[neighbor]:
+                queue.append(neighbor)
+    return isTrapped
 
 
 def input2(*a, **kw):
@@ -32,13 +42,19 @@ for _ in range(n):
         adj[o] = []
     if d not in adj:
         adj[d] = []
-    adj[o].append(d)
+    # We're gonna do something novel here. We're gonna traverse this graph backwards.
+    # Logic: If there is a city that MoM can get trapped in, then it won't have any out
+    # degrees so we flip our in and out degrees so that "trapped" cities all have 0 in
+    # degrees.
+    adj[d].append(o)
     if o not in inDegrees:
         inDegrees[o] = 0
     if d not in inDegrees:
         inDegrees[d] = 0
-    inDegrees[d] += 1
+    inDegrees[o] += 1
+trapped = bfs(adj, inDegrees)
 for i in iter(input2, None):
-    safe = detectCycle(i, adj, inDegrees)
-    print(i, end=' ')
-    print('safe' if safe else 'trapped')
+    if i in trapped:
+        print(i, 'trapped')
+    else:
+        print(i, 'safe')
