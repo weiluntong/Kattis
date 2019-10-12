@@ -1,0 +1,1 @@
+These are older programming team challenges. Some of them Microsoft, others are an older SDSMT contest format. Due to a combination of format and how I conducted these challenges, I can no longer verify their correctness or what problem I'm trying to solve.
