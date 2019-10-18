@@ -33,3 +33,6 @@
 
 # Tests
 input/*
+
+# IDE stuff
+.vscode
