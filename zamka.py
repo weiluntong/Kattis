@@ -8,7 +8,7 @@ def digitSum(n):
     return r
 
 
-L, D, X = map(int, [input() for i in range(3)])
+L, D, X = map(int, [input() for _ in range(3)])
 numList = []
 for i in range(L, D+1):
     if digitSum(i) == X:
