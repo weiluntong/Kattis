@@ -54,7 +54,4 @@ for _ in range(n):
     inDegrees[o] += 1
 trapped = bfs(adj, inDegrees)
 for i in iter(input2, None):
-    if i in trapped:
-        print(i, 'trapped')
-    else:
-        print(i, 'safe')
+    print(i, 'trapped' if i in trapped else 'safe')
