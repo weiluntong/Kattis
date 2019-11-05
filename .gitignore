@@ -33,6 +33,9 @@
 
 # Tests
 input/*
+codeforces/*/input/*
 
 # IDE stuff
 .vscode
+.mypy_cache
+__pycache__
